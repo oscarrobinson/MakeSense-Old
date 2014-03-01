@@ -63,5 +63,19 @@ class DataManager
         return $returnArray;
     }
 
+    public function getSensorsForNetwork($networkId){
+       $sql_select = "SELECT id FROM multiple_sensors WHERE networkid='".$networkId."'";
+        $stmt = $this->conn->query($sql_select);
+        $data = $stmt->fetchAll();
+        $returnArray = array(); 
+        foreach($data as $row)
+        {          
+            if (!in_array($row[0], $returnArray)){
+                array_push($returnArray, $row[0]);
+            }
+        }
+        return $returnArray;
+    }
+
 }
 ?>
